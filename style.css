@@ -1,181 +1,632 @@
 
+/* =========================================
+   ASP AI MOVEMENT COUNTER
+   Complete Responsive Stylesheet
+   ========================================= */
+
+/* 1. GLOBAL RESET */
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+:root {
+    --bg-main: #101820;
+    --bg-card: #192630;
+    --bg-card-light: #22333f;
+
+    --primary: #00b894;
+    --primary-hover: #00a383;
+
+    --danger: #e74c3c;
+    --danger-hover: #c0392b;
+
+    --text-main: #f5f7fa;
+    --text-muted: #aab7c4;
+
+    --border: #344653;
+    --white: #ffffff;
+
+    --radius: 14px;
+    --transition: 0.25s ease;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
 body {
-    font-family: Arial, sans-serif;
-    background: #f4f6f8;
-    color: #20252b;
     min-height: 100vh;
+    background: var(--bg-main);
+    color: var(--text-main);
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.6;
+    padding: 24px 16px;
 }
 
-.app-container {
-    width: 100%;
-    max-width: 850px;
-    margin: auto;
-    padding: 20px;
-}
-
-.app-header {
-    text-align: center;
-    padding: 25px 10px;
-}
-
-.app-header h1 {
-    font-size: clamp(23px, 5vw, 34px);
-    margin-bottom: 8px;
-}
-
-.app-header p {
-    color: #6b7280;
-}
-
-.exercise-section,
-.camera-section,
-.counter-section {
-    background: white;
-    border-radius: 14px;
-    padding: 20px;
-    margin-bottom: 18px;
-}
-
-.exercise-section h2 {
-    font-size: 19px;
-    margin-bottom: 15px;
-}
-
-.exercise-buttons {
-    display: flex;
-    gap: 10px;
+button,
+select {
+    font: inherit;
 }
 
 button {
-    font-size: 15px;
-    font-weight: bold;
-    border: none;
-    border-radius: 9px;
-    padding: 14px;
     cursor: pointer;
 }
 
+[hidden] {
+    display: none !important;
+}
+
+
+/* 2. MAIN APP CONTAINER */
+
+.app-container {
+    width: 100%;
+    max-width: 1050px;
+    margin: 0 auto;
+}
+
+
+/* 3. HEADER */
+
+.app-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+
+    padding: 24px;
+    margin-bottom: 24px;
+}
+
+.brand-section h1 {
+    font-size: clamp(22px, 4vw, 30px);
+    font-weight: 700;
+    letter-spacing: 0.3px;
+}
+
+.brand-section p {
+    color: var(--text-muted);
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+.system-status {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+
+    color: var(--text-muted);
+    font-size: 13px;
+    white-space: nowrap;
+}
+
+#system-status-indicator {
+    width: 10px;
+    height: 10px;
+    display: inline-block;
+
+    background: var(--primary);
+    border-radius: 50%;
+}
+
+
+/* 4. COMMON SECTION STYLING */
+
+.exercise-section,
+.camera-section,
+.counter-section,
+.control-section,
+.results-section {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+
+    padding: 24px;
+    margin-bottom: 24px;
+}
+
+.section-heading {
+    margin-bottom: 20px;
+}
+
+.section-heading h2,
+.results-section h2 {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.section-heading p {
+    color: var(--text-muted);
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+
+/* 5. EXERCISE SELECTION */
+
+.exercise-buttons {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+}
+
 .exercise-btn {
-    flex: 1;
-    background: #e9edf2;
-    color: #303943;
+    min-height: 60px;
+
+    background: var(--bg-card-light);
+    color: var(--text-main);
+
+    border: 2px solid var(--border);
+    border-radius: 10px;
+
+    font-size: 15px;
+    font-weight: 600;
+
+    transition: var(--transition);
+}
+
+.exercise-btn:hover {
+    border-color: var(--primary);
 }
 
 .exercise-btn.active {
-    background: #263b53;
-    color: white;
+    background: rgba(0, 184, 148, 0.13);
+    border-color: var(--primary);
+    color: var(--primary);
 }
 
-.camera-container {
+
+/* 6. CAMERA CONTROLS */
+
+.camera-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    margin-bottom: 16px;
+}
+
+.camera-controls label {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-muted);
+}
+
+#camera-select {
     width: 100%;
-    aspect-ratio: 16 / 9;
-    background: #111820;
-    border-radius: 12px;
-    overflow: hidden;
+    max-width: 320px;
+    min-height: 44px;
+
+    padding: 10px 12px;
+
+    background: var(--bg-card-light);
+    color: var(--text-main);
+
+    border: 1px solid var(--border);
+    border-radius: 8px;
+
+    outline: none;
+    cursor: pointer;
+}
+
+#camera-select:focus {
+    border-color: var(--primary);
+}
+
+
+/* 7. CAMERA PREVIEW */
+
+.camera-container {
     position: relative;
+    width: 100%;
+
+    aspect-ratio: 16 / 9;
+    min-height: 220px;
+
+    background: #080d11;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+
+    overflow: hidden;
 }
 
 #camera {
+    display: block;
+
     width: 100%;
     height: 100%;
+
     object-fit: contain;
-    display: none;
+
+    position: absolute;
+    inset: 0;
+
+    transform: scaleX(-1);
+}
+
+#pose-canvas {
+    position: absolute;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    z-index: 2;
+    pointer-events: none;
+
     transform: scaleX(-1);
 }
 
 #camera-placeholder {
     position: absolute;
     inset: 0;
+
+    z-index: 3;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+    padding: 20px;
+
+    background: #111a20;
+}
+
+.placeholder-content h3 {
+    font-size: 19px;
+    margin-bottom: 8px;
+}
+
+.placeholder-content p {
+    color: var(--text-muted);
+    font-size: 13px;
+}
+
+.camera-error {
+    position: absolute;
+    inset: 0;
+
+    z-index: 5;
+
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
+
+    padding: 20px;
+    text-align: center;
+
+    background: rgba(100, 20, 20, 0.94);
+    color: var(--white);
 }
 
-#status {
+#camera-error-message {
+    font-size: 14px;
+}
+
+
+/* 8. TRACKING INFORMATION */
+
+.tracking-information {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+
+    margin-top: 16px;
+}
+
+.tracking-item {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+
+    padding: 14px;
+
+    background: var(--bg-card-light);
+    border: 1px solid var(--border);
+    border-radius: 9px;
+}
+
+.tracking-label {
+    color: var(--text-muted);
+    font-size: 12px;
+}
+
+.tracking-item span:last-child {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+
+/* 9. WORKOUT STATISTICS */
+
+.counter-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+}
+
+.counter-card {
+    min-height: 125px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+
+    background: var(--bg-card-light);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+
+    padding: 18px 10px;
     text-align: center;
-    padding: 15px 0;
-    color: #64748b;
+}
+
+.counter-label {
+    color: var(--text-muted);
+    font-size: 13px;
+}
+
+.counter-card h2 {
+    color: var(--primary);
+    font-size: clamp(25px, 5vw, 36px);
+    font-weight: 700;
+    line-height: 1.2;
+    font-variant-numeric: tabular-nums;
+}
+
+
+/* 10. START AND STOP CONTROLS */
+
+.control-buttons {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
 }
 
 .start-btn,
 .stop-btn {
-    width: 100%;
-    color: white;
-    margin-top: 8px;
+    min-height: 55px;
+
+    border: none;
+    border-radius: 10px;
+
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 1px;
+
+    transition: var(--transition);
 }
 
 .start-btn {
-    background: #16834b;
+    background: var(--primary);
+    color: #071b16;
+}
+
+.start-btn:hover:not(:disabled) {
+    background: var(--primary-hover);
 }
 
 .stop-btn {
-    background: #c73535;
+    background: var(--danger);
+    color: var(--white);
 }
 
-button:disabled {
+.stop-btn:hover:not(:disabled) {
+    background: var(--danger-hover);
+}
+
+.start-btn:disabled,
+.stop-btn:disabled {
     opacity: 0.45;
     cursor: not-allowed;
 }
 
-.counter-section {
+#status {
+    margin-top: 16px;
+
+    color: var(--text-muted);
+    font-size: 14px;
+    text-align: center;
+}
+
+
+/* 11. WORKOUT RESULTS */
+
+.results-section h2 {
+    margin-bottom: 16px;
+}
+
+.results-content {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
+    gap: 10px;
 }
 
-.counter-card {
-    background: #f1f4f7;
-    border-radius: 10px;
-    padding: 18px 8px;
+.results-content p {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+
+    padding: 12px;
+
+    background: var(--bg-card-light);
+    border-radius: 8px;
+
+    font-size: 14px;
+}
+
+.results-content strong {
+    color: var(--primary);
+    text-align: right;
+}
+
+
+/* 12. FOOTER */
+
+.app-footer {
+    padding: 20px 10px;
     text-align: center;
-}
 
-.counter-card span {
+    color: var(--text-muted);
     font-size: 12px;
-    color: #64748b;
 }
 
-.counter-card h2 {
-    font-size: 27px;
-    margin-top: 10px;
+.app-footer p + p {
+    margin-top: 3px;
 }
 
-footer {
-    text-align: center;
-    padding: 15px;
-    color: #87909b;
-    font-size: 13px;
+
+/* 13. KEYBOARD ACCESSIBILITY */
+
+button:focus-visible,
+select:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 3px;
 }
 
-@media (max-width: 480px) {
 
-    .app-container {
-        padding: 12px;
+/* 14. TABLET RESPONSIVENESS */
+
+@media (max-width: 768px) {
+
+    body {
+        padding: 16px 12px;
+    }
+
+    .app-header {
+        padding: 20px;
     }
 
     .exercise-section,
     .camera-section,
-    .counter-section {
-        padding: 14px;
+    .counter-section,
+    .control-section,
+    .results-section {
+        padding: 20px;
+    }
+
+    .camera-container {
+        aspect-ratio: 4 / 3;
+    }
+
+    .tracking-information {
+        grid-template-columns: 1fr;
+    }
+
+    .tracking-item {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+}
+
+
+/* 15. MOBILE RESPONSIVENESS */
+
+@media (max-width: 480px) {
+
+    body {
+        padding: 10px;
+    }
+
+    .app-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 14px;
+
+        padding: 18px;
+    }
+
+    .brand-section h1 {
+        font-size: 22px;
+    }
+
+    .system-status {
+        font-size: 12px;
+    }
+
+    .exercise-section,
+    .camera-section,
+    .counter-section,
+    .control-section,
+    .results-section {
+        padding: 16px;
+        margin-bottom: 16px;
+    }
+
+    .section-heading h2,
+    .results-section h2 {
+        font-size: 18px;
     }
 
     .exercise-buttons {
-        flex-direction: column;
+        grid-template-columns: 1fr;
+        gap: 10px;
     }
 
-    .counter-section {
-        grid-template-columns: repeat(2, 1fr);
+    .exercise-btn {
+        min-height: 52px;
     }
 
-    .counter-card:last-child {
-        grid-column: 1 / -1;
+    .camera-container {
+        aspect-ratio: 3 / 4;
+        min-height: 280px;
     }
 
+    .counter-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .counter-card {
+        min-height: 95px;
+    }
+
+    .counter-card h2 {
+        font-size: 30px;
+    }
+
+    .control-buttons {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .start-btn,
+    .stop-btn {
+        min-height: 50px;
+    }
+
+    .results-content p {
+        font-size: 13px;
+    }
+}
+
+
+/* 16. SMALL SCREEN ADJUSTMENTS */
+
+@media (max-width: 340px) {
+
+    .brand-section h1 {
+        font-size: 19px;
+    }
+
+    .section-heading h2 {
+        font-size: 16px;
+    }
+
+    .camera-container {
+        min-height: 230px;
+    }
+
+    .tracking-item {
+        gap: 8px;
+    }
 }
