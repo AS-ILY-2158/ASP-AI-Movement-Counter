@@ -1,0 +1,181 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f6f8;
+    color: #20252b;
+    min-height: 100vh;
+}
+
+.app-container {
+    width: 100%;
+    max-width: 850px;
+    margin: auto;
+    padding: 20px;
+}
+
+.app-header {
+    text-align: center;
+    padding: 25px 10px;
+}
+
+.app-header h1 {
+    font-size: clamp(23px, 5vw, 34px);
+    margin-bottom: 8px;
+}
+
+.app-header p {
+    color: #6b7280;
+}
+
+.exercise-section,
+.camera-section,
+.counter-section {
+    background: white;
+    border-radius: 14px;
+    padding: 20px;
+    margin-bottom: 18px;
+}
+
+.exercise-section h2 {
+    font-size: 19px;
+    margin-bottom: 15px;
+}
+
+.exercise-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+button {
+    font-size: 15px;
+    font-weight: bold;
+    border: none;
+    border-radius: 9px;
+    padding: 14px;
+    cursor: pointer;
+}
+
+.exercise-btn {
+    flex: 1;
+    background: #e9edf2;
+    color: #303943;
+}
+
+.exercise-btn.active {
+    background: #263b53;
+    color: white;
+}
+
+.camera-container {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: #111820;
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+}
+
+#camera {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: none;
+    transform: scaleX(-1);
+}
+
+#camera-placeholder {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+#status {
+    text-align: center;
+    padding: 15px 0;
+    color: #64748b;
+}
+
+.start-btn,
+.stop-btn {
+    width: 100%;
+    color: white;
+    margin-top: 8px;
+}
+
+.start-btn {
+    background: #16834b;
+}
+
+.stop-btn {
+    background: #c73535;
+}
+
+button:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+
+.counter-section {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+}
+
+.counter-card {
+    background: #f1f4f7;
+    border-radius: 10px;
+    padding: 18px 8px;
+    text-align: center;
+}
+
+.counter-card span {
+    font-size: 12px;
+    color: #64748b;
+}
+
+.counter-card h2 {
+    font-size: 27px;
+    margin-top: 10px;
+}
+
+footer {
+    text-align: center;
+    padding: 15px;
+    color: #87909b;
+    font-size: 13px;
+}
+
+@media (max-width: 480px) {
+
+    .app-container {
+        padding: 12px;
+    }
+
+    .exercise-section,
+    .camera-section,
+    .counter-section {
+        padding: 14px;
+    }
+
+    .exercise-buttons {
+        flex-direction: column;
+    }
+
+    .counter-section {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .counter-card:last-child {
+        grid-column: 1 / -1;
+    }
+
+}
