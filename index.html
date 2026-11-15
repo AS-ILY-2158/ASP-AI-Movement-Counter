@@ -1,0 +1,94 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ASP AI Movement Counter</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <main class="app-container">
+
+        <header class="app-header">
+            <h1>ASP AI Movement Counter</h1>
+            <p>AI-Powered Exercise Counting</p>
+        </header>
+
+        <section class="exercise-section">
+
+            <h2>Select Exercise</h2>
+
+            <div class="exercise-buttons">
+
+                <button class="exercise-btn active"
+                    data-exercise="jumping-jacks">
+                    Jumping Jacks
+                </button>
+
+                <button class="exercise-btn"
+                    data-exercise="jump-rope">
+                    Jump Rope
+                </button>
+
+            </div>
+
+        </section>
+
+        <section class="camera-section">
+
+            <div class="camera-container">
+
+                <video id="camera" autoplay playsinline muted></video>
+
+                <div id="camera-placeholder">
+                    Camera Preview
+                </div>
+
+            </div>
+
+            <p id="status">Camera is not started</p>
+
+            <button id="start-btn" class="start-btn">
+                START
+            </button>
+
+            <button id="stop-btn" class="stop-btn" disabled>
+                STOP
+            </button>
+
+        </section>
+
+        <section class="counter-section">
+
+            <div class="counter-card">
+                <span>Total Counts</span>
+                <h2 id="total-count">0</h2>
+            </div>
+
+            <div class="counter-card">
+                <span>Duration</span>
+                <h2 id="duration">00:00</h2>
+            </div>
+
+            <div class="counter-card">
+                <span>Incomplete</span>
+                <h2 id="incomplete-count">0</h2>
+            </div>
+
+        </section>
+
+        <footer>
+            <p>ASP Group of Businesses</p>
+        </footer>
+
+    </main>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
