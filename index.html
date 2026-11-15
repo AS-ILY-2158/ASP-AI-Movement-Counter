@@ -1,94 +1,401 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <meta name="theme-color"
+          content="#101820">
+
+    <meta name="description"
+          content="ASP AI Movement Counter - AI-powered Jumping Jacks and Jump Rope counting.">
 
     <title>ASP AI Movement Counter</title>
 
+    <!-- Main Stylesheet -->
     <link rel="stylesheet" href="style.css">
+
 </head>
 
 <body>
 
     <main class="app-container">
 
+        <!-- HEADER -->
+
         <header class="app-header">
-            <h1>ASP AI Movement Counter</h1>
-            <p>AI-Powered Exercise Counting</p>
+
+            <div class="brand-section">
+
+                <h1>ASP AI Movement Counter</h1>
+
+                <p>
+                    AI-Powered Exercise Counting
+                </p>
+
+            </div>
+
+            <div class="system-status">
+
+                <span id="system-status-indicator"></span>
+
+                <span id="system-status-text">
+                    System Ready
+                </span>
+
+            </div>
+
         </header>
+
+
+        <!-- EXERCISE SELECTION -->
 
         <section class="exercise-section">
 
-            <h2>Select Exercise</h2>
+            <div class="section-heading">
+
+                <h2>Select Exercise</h2>
+
+                <p>
+                    Choose your workout before starting.
+                </p>
+
+            </div>
 
             <div class="exercise-buttons">
 
-                <button class="exercise-btn active"
-                    data-exercise="jumping-jacks">
-                    Jumping Jacks
+                <button
+                    type="button"
+                    class="exercise-btn active"
+                    data-exercise="jumping-jacks"
+                    aria-pressed="true">
+
+                    <span>Jumping Jacks</span>
+
                 </button>
 
-                <button class="exercise-btn"
-                    data-exercise="jump-rope">
-                    Jump Rope
+                <button
+                    type="button"
+                    class="exercise-btn"
+                    data-exercise="jump-rope"
+                    aria-pressed="false">
+
+                    <span>Jump Rope</span>
+
                 </button>
 
             </div>
 
         </section>
 
+
+        <!-- CAMERA SETTINGS -->
+
         <section class="camera-section">
+
+            <div class="section-heading">
+
+                <h2>Camera & AI Tracking</h2>
+
+                <p>
+                    Position your camera to capture your full body.
+                </p>
+
+            </div>
+
+
+            <!-- CAMERA SELECTION -->
+
+            <div class="camera-controls">
+
+                <label for="camera-select">
+                    Camera Selection
+                </label>
+
+                <select
+                    id="camera-select"
+                    aria-label="Select camera">
+
+                    <option value="user">
+                        Front Camera
+                    </option>
+
+                    <option value="environment">
+                        Back Camera
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- CAMERA PREVIEW -->
 
             <div class="camera-container">
 
-                <video id="camera" autoplay playsinline muted></video>
+                <video
+                    id="camera"
+                    autoplay
+                    playsinline
+                    muted>
+                </video>
+
+                <canvas
+                    id="pose-canvas">
+                </canvas>
+
+
+                <!-- CAMERA PLACEHOLDER -->
 
                 <div id="camera-placeholder">
-                    Camera Preview
+
+                    <div class="placeholder-content">
+
+                        <h3>Camera Preview</h3>
+
+                        <p>
+                            Camera will appear here after START.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- CAMERA ERROR -->
+
+                <div
+                    id="camera-error"
+                    class="camera-error"
+                    role="alert"
+                    hidden>
+
+                    <p id="camera-error-message"></p>
+
                 </div>
 
             </div>
 
-            <p id="status">Camera is not started</p>
 
-            <button id="start-btn" class="start-btn">
-                START
-            </button>
+            <!-- TRACKING INFORMATION -->
 
-            <button id="stop-btn" class="stop-btn" disabled>
-                STOP
-            </button>
+            <div class="tracking-information">
+
+                <div class="tracking-item">
+
+                    <span class="tracking-label">
+                        Camera Status
+                    </span>
+
+                    <span id="camera-status">
+                        Not Connected
+                    </span>
+
+                </div>
+
+
+                <div class="tracking-item">
+
+                    <span class="tracking-label">
+                        AI Tracking
+                    </span>
+
+                    <span id="ai-status">
+                        Not Started
+                    </span>
+
+                </div>
+
+
+                <div class="tracking-item">
+
+                    <span class="tracking-label">
+                        Body Detection
+                    </span>
+
+                    <span id="body-status">
+                        Waiting
+                    </span>
+
+                </div>
+
+            </div>
 
         </section>
+
+
+        <!-- WORKOUT COUNTERS -->
 
         <section class="counter-section">
 
-            <div class="counter-card">
-                <span>Total Counts</span>
-                <h2 id="total-count">0</h2>
+            <div class="section-heading">
+
+                <h2>Workout Statistics</h2>
+
             </div>
 
-            <div class="counter-card">
-                <span>Duration</span>
-                <h2 id="duration">00:00</h2>
-            </div>
 
-            <div class="counter-card">
-                <span>Incomplete</span>
-                <h2 id="incomplete-count">0</h2>
+            <div class="counter-grid">
+
+
+                <!-- TOTAL COUNTS -->
+
+                <div class="counter-card">
+
+                    <span class="counter-label">
+                        Total Counts
+                    </span>
+
+                    <h2
+                        id="total-count"
+                        aria-live="polite">
+                        0
+                    </h2>
+
+                </div>
+
+
+                <!-- INCOMPLETE COUNTS -->
+
+                <div class="counter-card">
+
+                    <span class="counter-label">
+                        Incomplete
+                    </span>
+
+                    <h2
+                        id="incomplete-count"
+                        aria-live="polite">
+                        0
+                    </h2>
+
+                </div>
+
+
+                <!-- DURATION -->
+
+                <div class="counter-card">
+
+                    <span class="counter-label">
+                        Duration
+                    </span>
+
+                    <h2
+                        id="duration"
+                        aria-live="off">
+                        00:00
+                    </h2>
+
+                </div>
+
             </div>
 
         </section>
 
-        <footer>
-            <p>ASP Group of Businesses</p>
+
+        <!-- WORKOUT CONTROLS -->
+
+        <section class="control-section">
+
+            <div class="control-buttons">
+
+                <button
+                    type="button"
+                    id="start-btn"
+                    class="start-btn">
+
+                    START
+
+                </button>
+
+
+                <button
+                    type="button"
+                    id="stop-btn"
+                    class="stop-btn"
+                    disabled>
+
+                    STOP
+
+                </button>
+
+            </div>
+
+
+            <p
+                id="status"
+                role="status"
+                aria-live="polite">
+
+                Select an exercise and press START.
+
+            </p>
+
+        </section>
+
+
+        <!-- FINAL RESULTS -->
+
+        <section
+            id="results-section"
+            class="results-section"
+            hidden>
+
+            <h2>Workout Results</h2>
+
+            <div class="results-content">
+
+                <p>
+                    Exercise:
+                    <strong id="result-exercise">-</strong>
+                </p>
+
+                <p>
+                    Total Counts:
+                    <strong id="result-total">0</strong>
+                </p>
+
+                <p>
+                    Incomplete:
+                    <strong id="result-incomplete">0</strong>
+                </p>
+
+                <p>
+                    Duration:
+                    <strong id="result-duration">00:00</strong>
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- FOOTER -->
+
+        <footer class="app-footer">
+
+            <p>
+                ASP Group of Businesses
+            </p>
+
+            <p>
+                AI Movement Counter
+            </p>
+
         </footer>
 
     </main>
 
-    <script src="script.js"></script>
+
+    <!-- JAVASCRIPT MODULE -->
+
+    <script type="module" src="script.js"></script>
 
 </body>
+
 </html>
